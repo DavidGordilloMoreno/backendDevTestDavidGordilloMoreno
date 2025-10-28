@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class SimilarProductsController implements ProductsApi {
 
         Set<ProductDetail> responseSet = similarProducts.stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         return ResponseEntity.ok(responseSet);
     }
